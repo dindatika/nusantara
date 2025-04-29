@@ -6,7 +6,9 @@ public class Kegiatan {
     private String tanggal;
     private String thumbnailUrl;
 
-    public Kegiatan() {} // Diperlukan untuk Firestore tes ubah masahalh tabrak
+
+    public Kegiatan() {} // Diperlukan untuk Firestore tes ubah benar
+
 
     public Kegiatan(String judul, String cerita, String tanggal, String thumbnailUrl) {
         this.judul = judul;
