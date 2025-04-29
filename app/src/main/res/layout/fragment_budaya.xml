@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".BudayaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/headerumum"
+            android:text="" />
+
+        <!-- Banner Budaya -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/budaya_awal" />
+        </FrameLayout>
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:hint="Pencarian..."
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/edittext_border"
+            android:textSize="14sp" />
+        <!-- Grid Budaya -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:alignmentMode="alignMargins"
+            android:rowCount="3"
+            android:columnOrderPreserved="false"
+            android:useDefaultMargins="true">
+
+            <!-- Item Budaya -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_aceh"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ACEH"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- SUMATERA UTARA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_sumatrautara"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUMATERA UTARA"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- SUMATRA SELATAN -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_sumatraselatan"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUMATRA SELATAN"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- SUMATERA BARAT -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_sumatrabarat"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUMATERA BARAT"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- BENGKULU -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_bengkulu"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BENGKULU"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- RIAU -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_riau"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RIAU"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- KEPULAUAN RIAU -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_kepulauanriau"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KEPULAUAN RIAU"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- JAMBI -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_jambi"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JAMBI"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- LAMPUNG -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_lampung"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LAMPUNG"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

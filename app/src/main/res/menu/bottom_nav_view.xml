@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white">
+
+    <!-- halaman rumah -->
+    <item
+        android:id="@+id/beranda"
+        android:title="Beranda"
+        android:icon="@drawable/ic_home"
+        android:background="@android:color/white"/>
+
+    <!-- halaman sejarah -->
+    <item
+        android:id="@+id/sejarah"
+        android:title="Sejarah"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:background="@android:color/white"/>
+
+    <!-- halaman budaya -->
+    <item
+        android:id="@+id/budaya"
+        android:title="Budaya"
+        android:icon="@drawable/ic_budaya"
+        android:background="@android:color/white"/>
+
+    <!-- halaman kegiatan -->
+    <item
+        android:id="@+id/kegiatan"
+        android:title="Kegiatan"
+        android:icon="@drawable/ic_kegiatan"
+        android:background="@android:color/white"/>
+</menu>

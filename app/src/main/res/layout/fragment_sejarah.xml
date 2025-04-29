@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SejarahFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/headerumum" />
+
+            <!-- Gambar dengan overlay teks -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sejarah_awal" />
+
+            </FrameLayout>
+
+            <!-- Apa itu Nusantara -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:text="Apa itu Nusantara?"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Hari Nusantara, yang diperingati setiap tanggal 13 Desember, adalah momen sakral bagi bangsa Indonesia untuk merefleksikan jati dirinya sebagai negara maritim. Ini mengingatkan kita pada Deklarasi Djuanda, tonggak sejarah yang memperkuat kedaulatan maritim Indonesia."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Deklarasi ini, yang diumumkan pada 13 Desember 1957 oleh Perdana Menteri Djuanda Kartawidjaya, menyatukan seluruh laut Indonesia sebagai wilayah yang tidak terpisahkan. Sebelumnya, laut Indonesia bersifat terbuka dan rawan klaim asing, tetapi dengan deklarasi ini, kedaulatan dan integritas wilayah Indonesia semakin diperkuat."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <!-- Mengapa Deklarasi Djuanda Penting? -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:text="Mengapa Deklarasi Djuanda Penting?"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="1. Kedaulatan Nasional: Memastikan kontrol penuh atas wilayah laut Indonesia."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="2. Potensi Sumber Daya: Memanfaatkan kekayaan laut seperti ikan, minyak, dan gas."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="3. Keamanan dan Pertahanan: Menjaga keamanan maritim dari ancaman eksternal."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="4dp"
+                    android:text="4. Pembangunan Ekonomi: Meningkatkan sektor perikanan, pariwisata bahari, dan transportasi laut."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Hari Nusantara bukan hanya peringatan, tetapi momentum untuk meningkatkan kesadaran maritim, mendorong pembangunan berkelanjutan, dan memperkuat diplomasi maritim Indonesia."
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <!-- Pesan Untuk Generasi Muda -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/sejarah_pesanuntukgenerasimuda"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Pesan untuk Generasi Muda!"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Belajar tentang laut: Kenali potensi dan tantangan laut Indonesia."
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Aktif melestarikan laut: Dukung upaya menjaga kebersihan dan kelestarian ekosistem maritim."
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Bangun karir di sektor maritim: Jadilah bagian dari pembangunan maritim Indonesia."
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Mari jadikan Hari Nusantara sebagai inspirasi untuk terus menjaga persatuan dan keberagaman dalam bingkai Negara Kesatuan Republik Indonesia."
+                    android:textStyle="italic"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

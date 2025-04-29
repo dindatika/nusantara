@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TambahKegiatanActivity"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/headerumum"/>
+
+        <!-- Gambar dengan overlay teks -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/kegiatan_awal" />
+        </FrameLayout>
+
+        <!-- Judul -->
+        <EditText
+            android:id="@+id/etJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Judul Kegiatan"
+            android:inputType="text"
+            android:padding="12dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <!-- Cerita Singkat -->
+        <EditText
+            android:id="@+id/etCerita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cerita Singkat"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:gravity="top"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <EditText
+            android:id="@+id/edtGambarUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan URL gambar"
+            android:inputType="textUri"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/black"
+            android:textColorHint="@color/black"
+            android:padding="12dp"/>
+
+<!--        &lt;!&ndash; Gambar Thumbnail &ndash;&gt;-->
+<!--        <Button-->
+<!--            android:id="@+id/btnPilihGambar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Pilih Gambar Thumbnail"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:backgroundTint="@color/black"-->
+<!--            android:textColor="@color/white"/>-->
+
+        <ImageView
+            android:id="@+id/imgThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <!-- Tombol Simpan -->
+        <Button
+            android:id="@+id/btnSimpan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan Kegiatan"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

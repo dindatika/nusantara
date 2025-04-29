@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795797300317",
+    "project_id": "nusantara-7a147",
+    "storage_bucket": "nusantara-7a147.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795797300317:android:92b6dac4261e8eaa98d9b4",
+        "android_client_info": {
+          "package_name": "com.proyek.nusantara"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1zMH7uxR3ITe_Art2oSDg6RVEv3JxxTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

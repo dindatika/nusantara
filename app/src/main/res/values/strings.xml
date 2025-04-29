@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nusantara</string>
+    <string name="etEmail">Email</string>
+    <string name="etPassword">Password</string>
+    <string name="btnLogin">btnLogin</string>
+    <string name="etName">Nama</string>
+    <string name="btnRegister">btnRegister</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

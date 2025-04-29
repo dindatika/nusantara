@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".BerandaFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/headerumum"/>
+
+            <!-- Gambar dengan overlay teks -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/beranda_awal" />
+
+            </FrameLayout>
+
+            <!-- Card Cerita Singkat -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:background="@drawable/background"
+                android:elevation="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cerita Singkat"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hari Nusantara berawal dari peristiwa Deklarasi Juanda pada 13 Desember 1957. Deklarasi Juanda dibuat untuk menyatakan kepada dunia bahwa laut Indonesia dan kepulauan Indonesia menjadi satu kesatuan wilayah NKRI. Pernyataan tersebut disampaikan langsung oleh Perdana Menteri Indonesia Djuanda Kartawidjaya. Pada tanggal 13 Desember 1999 baru dicetuskan bahwa tanggal tersebut sebagai 'Hari Nusantara'. Namun, Hari Nusantara baru ditetapkan pada tanggal 11 Desember 2001 oleh Presiden RI Megawati Soekarnoputri, melalui Surat Keputusan Presiden Nomor 126 Tahun 2001."
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+
+            <!-- Gambar Kapal -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/beranda_fotokapal"
+                android:scaleType="fitCenter" />
+
+            <!-- Tombol Tonton Video -->
+            <Button
+                android:id="@+id/btnTontonVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tonton Video"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/black"
+                android:padding="12dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
