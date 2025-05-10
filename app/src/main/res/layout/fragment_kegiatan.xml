@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,18 +8,32 @@
     android:background="@color/white"
     tools:context=".KegiatanFragment">
 
+    <!-- Header tetap -->
+    <ImageView
+        android:id="@+id/imgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/headerumum" />
+
+    <!-- Foto Profil di kanan atas -->
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:background="@drawable/circle_background"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
     <!-- Kontainer Utama -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Header -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/headerumum"/>
+        android:layout_marginTop="70dp">
 
         <!-- Gambar awal -->
         <FrameLayout
@@ -37,12 +51,12 @@
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:layout_marginTop="12dp"
             android:hint="Pencarian..."
             android:paddingHorizontal="8dp"
             android:background="@drawable/edittext_border"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -50,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:importantForAccessibility="no"/>
     </LinearLayout>
 
     <!-- FAB (Floating Action Button) -->
@@ -58,11 +73,10 @@
         android:id="@+id/fabTambahKegiatan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         android:src="@drawable/ic_add"
         android:contentDescription="Tambah Kegiatan"
         android:backgroundTint="@color/white"
         android:background="@color/black"/>
-</RelativeLayout>
+</FrameLayout>

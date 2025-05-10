@@ -6,10 +6,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +65,13 @@ public class BerandaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+
+        ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        imgProfile.setOnClickListener(v -> {
+            Log.d("BerandaFragment", "Profile diklik");
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
 
         Button btnTontonVideo = view.findViewById(R.id.btnTontonVideo);
         btnTontonVideo.setOnClickListener(new View.OnClickListener() {

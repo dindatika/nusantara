@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.storage.FirebaseStorage;
 //import com.google.firebase.storage.StorageReference;
@@ -55,6 +56,12 @@ public class TambahKegiatanActivity extends AppCompatActivity {
         edtGambarUrl = findViewById(R.id.edtGambarUrl);
         btnSimpan = findViewById(R.id.btnSimpan);
         imgThumbnail = findViewById(R.id.imgThumbnail);
+
+        FloatingActionButton fabback = findViewById(R.id.fabback);
+        fabback.setOnClickListener(v -> {
+            // Menutup aktivitas dan kembali ke sebelumnya
+            finish();
+        });
 
         // Event klik tombol simpan
         btnSimpan.setOnClickListener(v -> {

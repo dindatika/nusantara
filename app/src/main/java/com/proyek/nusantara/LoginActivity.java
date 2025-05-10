@@ -19,12 +19,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.proyek.nusantara.databinding.ActivityLoginBinding;
-import com.proyek.nusantara.databinding.ActivityMainBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private FirebaseFirestore db;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,31 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         db = FirebaseFirestore.getInstance();
+        session = new SessionManager(this);
 
         setupAction();
     }
 
     private void setupAction() {
-        binding.tvRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        binding.tvRegister.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = binding.etEmail.getText().toString();
-                String password = binding.etPassword.getText().toString();
+        binding.btnLogin.setOnClickListener(v -> {
+            String email = binding.etEmail.getText().toString().trim();
+            String password = binding.etPassword.getText().toString();
 
-                if (email.isEmpty() || password.isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Email atau Password Salah", Toast.LENGTH_SHORT).show();
-                } else {
-                    checkAkun(email, password);
-
-                }
+            if (email.isEmpty() || password.isEmpty()){
+                Toast.makeText(LoginActivity.this, "Email atau Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            } else {
+                checkAkun(email, password);
             }
         });
     }
@@ -73,38 +66,40 @@ public class LoginActivity extends AppCompatActivity {
         db.collection("users")
                 .whereEqualTo("email", email)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
-                            QuerySnapshot querySnapshot = task.getResult();
-                            boolean isPasswordCorrect = false;
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        boolean isPasswordCorrect = false;
+                        String userId = null, userName = null, userToken = null;
 
-                            for (QueryDocumentSnapshot document : querySnapshot){
-                                String storedPassword = document.getString("password");
-                                if (storedPassword != null && storedPassword.equals(password)){
-                                    isPasswordCorrect = true;
-                                    break;
-                                }
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            String storedPassword = doc.getString("password");
+                            if (storedPassword != null && storedPassword.equals(password)) {
+                                isPasswordCorrect = true;
+                                userId    = doc.getId();
+                                userName  = doc.getString("name");   // asumsikan ada field "name"
+                                userToken = doc.getString("token");  // atau token jika ada
+                                break;
                             }
-
-                            if (isPasswordCorrect){
-                                Toast.makeText(LoginActivity.this, "Login Berhasil", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Password Salah", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Akun Tidak DItemukan", Toast.LENGTH_SHORT).show();
                         }
+
+                        if (isPasswordCorrect) {
+                            // Simpan session
+                            session.createSession(userId, userName, userToken);
+
+                            Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish(); // agar user tidak bisa kembali ke Login
+                        } else {
+                            Toast.makeText(this, "Password Salah", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Gagal Login: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 }
