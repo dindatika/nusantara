@@ -24,45 +24,52 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
         void onEdit(Kegiatan item);
         void onDelete(Kegiatan item);
     }
-    private List<Kegiatan> list;
-    private Context ctx;
-    private OnProfileActionListener callback;
+    private final List<Kegiatan> kegiatanList;
+    private final Context context;
+    private final OnProfileActionListener actionListener;
 
-    public ProfileKegiatanAdapter(Context ctx, OnProfileActionListener callback) {
-        this.ctx = ctx;
-        this.callback = callback;
-        this.list = new ArrayList<>();
+    public ProfileKegiatanAdapter(Context context, OnProfileActionListener actionListener) {
+        this.context = context;
+        this.actionListener = actionListener;
+        this.kegiatanList = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(ctx)
-                .inflate(R.layout.item_kegiatan_profil, parent, false);
-        return new ViewHolder(v);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_kegiatan_profil, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Kegiatan k = list.get(position);
-        holder.tvJudul.setText(k.getJudul());
-        holder.tvTanggal.setText(k.getTanggal());
-        holder.tvCerita.setText(k.getCerita());
-        Glide.with(ctx).load(k.getThumbnailUrl()).into(holder.imgThumbnail);
+        Kegiatan kegiatan = kegiatanList.get(position);
 
-        holder.tvLihatDetail.setOnClickListener(v -> callback.onViewDetail(k));
-        holder.tvEdit.setOnClickListener(v -> callback.onEdit(k));
-        holder.tvHapus.setOnClickListener(v -> callback.onDelete(k));
+        holder.tvJudul.setText(kegiatan.getJudul());
+        holder.tvTanggal.setText(kegiatan.getTanggal());
+        holder.tvCerita.setText(kegiatan.getCerita());
+
+        // Load thumbnail if available
+        if (kegiatan.getThumbnailUrl() != null && !kegiatan.getThumbnailUrl().isEmpty()) {
+            Glide.with(context).load(kegiatan.getThumbnailUrl()).into(holder.imgThumbnail);
+        } else {
+            holder.imgThumbnail.setImageResource(R.drawable.background); // Placeholder image
+        }
+
+        // Set click listeners for actions
+        holder.tvLihatDetail.setOnClickListener(v -> actionListener.onViewDetail(kegiatan));
+        holder.tvEdit.setOnClickListener(v -> actionListener.onEdit(kegiatan));
+        holder.tvHapus.setOnClickListener(v -> actionListener.onDelete(kegiatan));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return kegiatanList.size();
     }
 
-    public void submitList(List<Kegiatan> data) {
-        list.clear();
-        list.addAll(data);
+    public void submitList(List<Kegiatan> newKegiatanList) {
+        kegiatanList.clear();
+        kegiatanList.addAll(newKegiatanList);
         notifyDataSetChanged();
     }
 

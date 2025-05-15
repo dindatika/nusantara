@@ -56,7 +56,9 @@
             android:hint="Pencarian..."
             android:paddingHorizontal="8dp"
             android:background="@drawable/edittext_border"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView

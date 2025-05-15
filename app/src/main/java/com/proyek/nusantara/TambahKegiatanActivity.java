@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.storage.FirebaseStorage;
 //import com.google.firebase.storage.StorageReference;
@@ -75,24 +76,37 @@ public class TambahKegiatanActivity extends AppCompatActivity {
                 return;
             }
 
-            // Menampilkan gambar ke ImageView sebagai preview
+            // Tampilkan gambar ke ImageView sebagai preview (tidak diubah)
             imgThumbnail.setVisibility(View.VISIBLE);
             Glide.with(this).load(gambarUrl).into(imgThumbnail);
 
-            // Simpan ke Firestore
+            // Ambil userId dari session
+            SessionManager session = new SessionManager(this);
+            String userId = session.getUserId();
+
+            if (userId == null) {
+                Toast.makeText(this, "User tidak ditemukan, silakan login kembali.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Siapkan data kegiatan
             Map<String, Object> kegiatan = new HashMap<>();
             kegiatan.put("judul", judul);
             kegiatan.put("cerita", cerita);
             kegiatan.put("tanggal", tanggal);
             kegiatan.put("thumbnailUrl", gambarUrl);
+            kegiatan.put("userId", userId);
 
+            // Simpan ke Firestore
             FirebaseFirestore.getInstance().collection("kegiatan")
                     .add(kegiatan)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(this, "Kegiatan berhasil disimpan!", Toast.LENGTH_SHORT).show();
-                        finish(); // kembali ke halaman sebelumnya
+                        finish();
                     })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Gagal simpan: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Gagal menyimpan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
         });
     }
 }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white"
     tools:context=".ProfileActivity">
 
-    <!-- header -->
+    <!-- Header -->
     <ImageView
         android:id="@+id/imgHeader"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/headerumum" />
 
+    <!-- Profil Section -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -24,9 +26,7 @@
         android:padding="16dp"
         android:gravity="center_horizontal">
 
-    <!-- Logo dan Avatar -->
-
-        <!-- Card Profil -->
+        <!-- Avatar -->
         <ImageView
             android:id="@+id/avatar"
             android:layout_width="120dp"
@@ -34,64 +34,56 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_launcher_foreground" />
 
+        <!-- Card Profil -->
         <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="16dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="16dp">
 
-    <!-- Identitas -->
-    <LinearLayout
-        android:orientation="vertical"
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama:"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Tombol Logout -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- RecyclerView menampilkan list kegiatan -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKegiatanProfil"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvNama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nama:"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textSize="16sp"/>
-    </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Tombol Logout -->
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF"/>
-
-    <!-- Status Upload -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Berhasil Upload"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
-
-        <LinearLayout
-            android:id="@+id/postContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"/>
-
-    </LinearLayout>
+        tools:listitem="@layout/item_kegiatan_profil"
+        android:contentDescription="List of user activities" />
 
     <!-- FAB Back Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -103,13 +95,4 @@
         android:contentDescription="Kembali"
         android:src="@drawable/ic_back"
         app:backgroundTint="@color/white" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKegiatanProfil"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"/>
-
-</FrameLayout>
+</LinearLayout>
