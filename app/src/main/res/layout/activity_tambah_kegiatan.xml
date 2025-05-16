@@ -22,8 +22,8 @@
             <!-- Header -->
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/headerumum"/>
+                android:layout_height="78dp"
+                android:background="@drawable/headerumum" />
 
             <!-- Gambar dengan overlay teks -->
             <FrameLayout
@@ -65,34 +65,52 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"/>
 
+            <!-- Isi Cerita Panjang -->
             <EditText
-                android:id="@+id/edtGambarUrl"
+                android:id="@+id/etIsiCerita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukkan URL gambar"
-                android:inputType="textUri"
-                android:textColor="@color/black"
+                android:hint="Tulis cerita lengkap di sini..."
+                android:inputType="textMultiLine|textImeMultiLine"
+                android:minLines="6"
+                android:gravity="top"
+                android:padding="12dp"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/black"
-                android:textColorHint="@color/black"
-                android:padding="12dp"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
 
-            <!--        &lt;!&ndash; Gambar Thumbnail &ndash;&gt;-->
-            <!--        <Button-->
-            <!--            android:id="@+id/btnPilihGambar"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="Pilih Gambar Thumbnail"-->
-            <!--            android:layout_marginTop="16dp"-->
-            <!--            android:backgroundTint="@color/black"-->
-            <!--            android:textColor="@color/white"/>-->
+            <!-- Gambar Thumbnail -->
+                <!-- menggunakan URL -->
+                <EditText
+                    android:id="@+id/edtGambarUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan URL gambar"
+                    android:inputType="textUri"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/black"
+                    android:textColorHint="@color/black"
+                    android:padding="12dp"/>
 
-            <ImageView
-                android:id="@+id/imgThumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone" />
+<!--                &lt;!&ndash; menggunakan button &ndash;&gt;-->
+<!--                <Button-->
+<!--                    android:id="@+id/btnPilihGambar"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Pilih Gambar Thumbnail"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:backgroundTint="@color/black"-->
+<!--                    android:textColor="@color/white"/>-->
+
+                    <!-- Tampilan Gambar dari button -->
+                    <ImageView
+                        android:id="@+id/imgThumbnail"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
 
             <!-- Tombol Simpan -->
             <Button
@@ -117,5 +135,4 @@
         android:contentDescription="Kembali"
         android:src="@drawable/ic_back"
         app:backgroundTint="@color/white" />
-
 </FrameLayout>

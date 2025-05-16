@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -86,6 +89,7 @@ public class KegiatanFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kegiatan, container, false);
 
+        // Profile click
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
         imgProfile.setOnClickListener(v -> {
             Log.d("KegiatanFragment", "Profile diklik");
@@ -93,28 +97,22 @@ public class KegiatanFragment extends Fragment {
             startActivity(intent);
         });
 
+        // Pencarian
         etPencarian = view.findViewById(R.id.searchEditText);
         etPencarian.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            @Override public void beforeTextChanged(CharSequence s, int st, int c, int aft) {}
+            @Override public void onTextChanged(CharSequence s, int st, int bef, int cnt) {}
+            @Override public void afterTextChanged(Editable s) {
+                performSearch(s.toString());
             }
+        });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        etPencarian.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch(v.getText().toString());
+                return true;
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                List<Kegiatan> filteredList = new ArrayList<>();
-                for (Kegiatan kegiatan : list) {
-                    if (kegiatan.getJudul().toLowerCase().contains(s.toString().toLowerCase()) || kegiatan.getCerita().toLowerCase().contains(s.toString().toLowerCase())) {
-                        filteredList.add(kegiatan);
-                    }
-                }
-                adapter.submitList(filteredList);
-            }
+            return false;
         });
 
         // Inisialisasi FAB
@@ -139,6 +137,18 @@ public class KegiatanFragment extends Fragment {
         ambilDataKegiatan();
 
         return view;
+    }
+
+    private void performSearch(String query) {
+        String lower = query.toLowerCase();
+        List<Kegiatan> filteredList = new ArrayList<>();
+        for (Kegiatan k : list) {
+            if (k.getJudul().toLowerCase().contains(lower)
+                    || k.getCeritaSingkat().toLowerCase().contains(lower)) {
+                filteredList.add(k);
+            }
+        }
+        adapter.submitList(filteredList);
     }
 
     private void ambilDataKegiatan() {

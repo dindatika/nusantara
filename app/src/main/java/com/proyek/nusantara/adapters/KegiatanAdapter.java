@@ -1,6 +1,7 @@
 package com.proyek.nusantara.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.proyek.nusantara.DetailActivity;
 import com.proyek.nusantara.Kegiatan;
 import com.proyek.nusantara.R;
 
@@ -39,11 +41,18 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.ViewHo
         Kegiatan kegiatan = kegiatanList.get(position);
         holder.tvJudul.setText(kegiatan.getJudul());
         holder.tvTanggal.setText(kegiatan.getTanggal());
-        holder.tvCerita.setText(kegiatan.getCerita());
+        holder.tvCerita.setText(kegiatan.getCeritaSingkat());
         Glide.with(context).load(kegiatan.getThumbnailUrl()).into(holder.imgThumbnail);
+
         holder.tvLihatDetail.setOnClickListener(v -> {
-            Toast.makeText(context, "Klik: " + kegiatan.getJudul(), Toast.LENGTH_SHORT).show();
-            // atau kirim intent ke DetailActivity
+            // Kirim data ke DetailActivity
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("judul", kegiatan.getJudul());
+            intent.putExtra("tanggal", kegiatan.getTanggal());
+            intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
+            intent.putExtra("thumbnailUrl", kegiatan.getThumbnailUrl());
+            intent.putExtra("isiCerita", kegiatan.getIsiCerita());
+            context.startActivity(intent);
         });
     }
 

@@ -54,9 +54,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Cek session
         if (!session.isLoggedIn()) {
-            // Redirect to LoginActivity if session is invalid
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
             return;
         }
@@ -111,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDelete(Kegiatan item) {
                 new AlertDialog.Builder(ProfileActivity.this)
-                        .setTitle("Hapus Kegiatan")
+                        .setTitle("Hapus Postingan")
                         .setMessage("Yakin ingin menghapus “" + item.getJudul() + "”?")
                         .setPositiveButton("Hapus", (d, w) -> deletePost(item.getId()))
                         .setNegativeButton("Batal", null)
@@ -178,6 +177,13 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.e("ProfileActivity", "Gagal memuat kegiatan", e);
                     Toast.makeText(this, "Gagal memuat kegiatan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    // Akan mengambil ulang data dari Firestore
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadUserPosts();
     }
 
     private void deletePost(String postId) {

@@ -58,7 +58,9 @@
             android:background="@drawable/edittext_border"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView

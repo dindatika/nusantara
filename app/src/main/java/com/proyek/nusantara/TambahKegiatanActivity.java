@@ -35,7 +35,7 @@ import java.util.UUID;
 
 public class TambahKegiatanActivity extends AppCompatActivity {
 
-    private EditText etJudul, etCerita, edtGambarUrl;
+    private EditText etJudul, etCerita, etIsiCerita, edtGambarUrl;
     private Button btnSimpan;
     private ImageView imgThumbnail;
 
@@ -51,13 +51,15 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Tambahkan logika form di bawah sini:
+        // Tambahkan view form di bawah sini:
         etJudul = findViewById(R.id.etJudul);
         etCerita = findViewById(R.id.etCerita);
+        etIsiCerita  = findViewById(R.id.etIsiCerita);
         edtGambarUrl = findViewById(R.id.edtGambarUrl);
         btnSimpan = findViewById(R.id.btnSimpan);
         imgThumbnail = findViewById(R.id.imgThumbnail);
 
+        // tombol kembali
         FloatingActionButton fabback = findViewById(R.id.fabback);
         fabback.setOnClickListener(v -> {
             // Menutup aktivitas dan kembali ke sebelumnya
@@ -68,22 +70,23 @@ public class TambahKegiatanActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(v -> {
             String judul = etJudul.getText().toString().trim();
             String cerita = etCerita.getText().toString().trim();
+            String isiCerita = etIsiCerita.getText().toString().trim();
             String gambarUrl = edtGambarUrl.getText().toString().trim();
             String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
+            // validasi
             if (judul.isEmpty() || cerita.isEmpty() || gambarUrl.isEmpty()) {
                 Toast.makeText(this, "Semua field wajib diisi!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Tampilkan gambar ke ImageView sebagai preview (tidak diubah)
+            // Tampilkan gambar ke ImageView sebagai preview
             imgThumbnail.setVisibility(View.VISIBLE);
             Glide.with(this).load(gambarUrl).into(imgThumbnail);
 
             // Ambil userId dari session
             SessionManager session = new SessionManager(this);
             String userId = session.getUserId();
-
             if (userId == null) {
                 Toast.makeText(this, "User tidak ditemukan, silakan login kembali.", Toast.LENGTH_SHORT).show();
                 return;
@@ -92,15 +95,17 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             // Siapkan data kegiatan
             Map<String, Object> kegiatan = new HashMap<>();
             kegiatan.put("judul", judul);
-            kegiatan.put("cerita", cerita);
+            kegiatan.put("ceritaSingkat", cerita);
+            kegiatan.put("isiCerita", isiCerita);
             kegiatan.put("tanggal", tanggal);
             kegiatan.put("thumbnailUrl", gambarUrl);
             kegiatan.put("userId", userId);
 
-            // Simpan ke Firestore
-            FirebaseFirestore.getInstance().collection("kegiatan")
+            // simpan ke Firestore
+            FirebaseFirestore.getInstance()
+                    .collection("kegiatan")
                     .add(kegiatan)
-                    .addOnSuccessListener(documentReference -> {
+                    .addOnSuccessListener(docRef -> {
                         Toast.makeText(this, "Kegiatan berhasil disimpan!", Toast.LENGTH_SHORT).show();
                         finish();
                     })
