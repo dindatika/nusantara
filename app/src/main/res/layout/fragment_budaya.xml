@@ -63,10 +63,13 @@
                 android:textSize="14sp"
                 android:layout_marginTop="12dp"
                 android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
 
             <!-- Grid Budaya -->
             <GridLayout
+                android:id="@+id/gridLayoutBudaya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
@@ -77,6 +80,7 @@
 
                 <!-- ACEH -->
                 <LinearLayout
+                    android:id="@+id/layoutAceh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -103,6 +107,7 @@
 
                 <!-- SUMATERA UTARA -->
                 <LinearLayout
+                    android:id="@+id/layoutSumateraUtara"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -112,7 +117,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/budaya_sumatrautara"
+                        android:src="@drawable/budaya_sumaterautara"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -129,6 +134,7 @@
 
                 <!-- SUMATRA SELATAN -->
                 <LinearLayout
+                    android:id="@+id/layoutSumateraSelatan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -138,14 +144,14 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/budaya_sumatraselatan"
+                        android:src="@drawable/budaya_sumateraselatan"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SUMATRA SELATAN"
+                        android:text="SUMATERA SELATAN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -155,6 +161,7 @@
 
                 <!-- SUMATERA BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutSumateraBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -164,7 +171,7 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/budaya_sumatrabarat"
+                        android:src="@drawable/budaya_sumaterabarat"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
@@ -181,6 +188,7 @@
 
                 <!-- BENGKULU -->
                 <LinearLayout
+                    android:id="@+id/layoutBengkulu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -207,6 +215,7 @@
 
                 <!-- RIAU -->
                 <LinearLayout
+                    android:id="@+id/layoutRiau"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -233,6 +242,7 @@
 
                 <!-- KEPULAUAN RIAU -->
                 <LinearLayout
+                    android:id="@+id/layoutKepulauanRiau"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -259,6 +269,7 @@
 
                 <!-- JAMBI -->
                 <LinearLayout
+                    android:id="@+id/layoutJambi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -285,6 +296,7 @@
 
                 <!-- LAMPUNG -->
                 <LinearLayout
+                    android:id="@+id/layoutLampung"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -309,8 +321,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Bangka Belitung -->
+                <!-- BANGKA BELITUNG -->
                 <LinearLayout
+                    android:id="@+id/layoutBangkaBelitung"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -327,7 +340,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bangka Belitung"
+                        android:text="BANGKA BELITUNG"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -335,8 +348,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Kalimatan Barat -->
+                <!-- KALIMANTAN BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutKalimantanBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -353,7 +367,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kalimatan Barat"
+                        android:text="KALIMANTAN BARAT"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -361,8 +375,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Kalimantan Timur -->
+                <!-- KALIMANTAN TIMUR -->
                 <LinearLayout
+                    android:id="@+id/layoutKalimantanTmur"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -379,7 +394,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kalimantan Timur"
+                        android:text="KALIMANTAN TIMUR"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -387,8 +402,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Kalimantan Selatan -->
+                <!-- KALIMANTAN SELATAN -->
                 <LinearLayout
+                    android:id="@+id/layoutKalimantanSelatan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -405,7 +421,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kalimantan Selatan"
+                        android:text="KALIMANTAN SELATAN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -413,8 +429,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Kalimantan Tengah   -->
+                <!-- KALIMANTAN TENGAH  -->
                 <LinearLayout
+                    android:id="@+id/layoutKalimantanTengah"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -431,7 +448,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="kalimantan Tengah"
+                        android:text="KALIMANTAN TENGAH"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -439,8 +456,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- kalimantan Utara -->
+                <!-- KALIMANTAN UTARA -->
                 <LinearLayout
+                    android:id="@+id/layoutKalimantanUtara"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -457,7 +475,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kalimantan Utara"
+                        android:text="KALIMANTAN UTARA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -465,8 +483,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Banten -->
+                <!-- BANTEN -->
                 <LinearLayout
+                    android:id="@+id/layoutBanten"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -483,7 +502,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Banten"
+                        android:text="BANTEN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -491,8 +510,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- DKI Jakarta -->
+                <!-- DKI JAKARTA -->
                 <LinearLayout
+                    android:id="@+id/layoutDkiJakarta"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -509,7 +529,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DKI Jakarta"
+                        android:text="DKI JAKARTA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -517,8 +537,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Jawa Barat -->
+                <!-- JAWA BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutJawaBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -535,7 +556,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jawa Barat"
+                        android:text="JAWA BARAT"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -543,8 +564,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Jawa Tengah -->
+                <!-- JAWA TENGAH -->
                 <LinearLayout
+                    android:id="@+id/layoutJawaTengah"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -561,7 +583,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jawa Tengah"
+                        android:text="JAWA TENGAH"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -569,8 +591,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Daerah Istimewa Yogyakarta -->
+                <!-- YOGYAKARTA -->
                 <LinearLayout
+                    android:id="@+id/layoutYogyakarta"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -580,14 +603,14 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/budaya_daerahistimewayogyakarta"
+                        android:src="@drawable/budaya_yogyakarta"
                         android:scaleType="centerCrop"
                         android:background="@drawable/rounded_corners" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Daerah Istimewa Yogyakarta"
+                        android:text="YOGYAKARTA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -595,8 +618,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Jawa Timur -->
+                <!-- JAWA TIMUR -->
                 <LinearLayout
+                    android:id="@+id/layoutJawaTimur"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -613,7 +637,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jawa Timur"
+                        android:text="JAWA TIMUR"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -621,8 +645,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Bali -->
+                <!-- BALI -->
                 <LinearLayout
+                    android:id="@+id/layoutBali"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -639,7 +664,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bali"
+                        android:text="BALI"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -647,8 +672,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Nusa Tenggara Timur -->
+                <!-- NUSA TENGGARA TIMUR -->
                 <LinearLayout
+                    android:id="@+id/layoutNusaTenggaraTimur"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -665,7 +691,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nusa Tenggara Timur"
+                        android:text="NUSA TENGGARA TIMUR"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -673,8 +699,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Nusa Tenggara Barat -->
+                <!-- NUSA TENGGARA BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutNusaTenggaraBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -691,7 +718,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nusa Tenggara Barat"
+                        android:text="NUSA TENGGARA BARAT"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -699,8 +726,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Gorontalo -->
+                <!-- GORONTALO -->
                 <LinearLayout
+                    android:id="@+id/layoutGorontalo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -717,7 +745,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gorontalo"
+                        android:text="GORONTALO"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -725,8 +753,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Sulawesi Barat -->
+                <!-- SULAWESI BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutSulawesiBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -743,7 +772,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sulawesi Barat"
+                        android:text="SULAWESI BARAT"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -751,8 +780,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Sulawesi Tengah -->
+                <!-- SULAWESI TENGAH -->
                 <LinearLayout
+                    android:id="@+id/layoutSulawesiTengah"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -769,7 +799,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sulawesi Tengah"
+                        android:text="SULAWESI TENGAH"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -777,8 +807,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Sulawesi Utara -->
+                <!-- SULAWESI UTARA -->
                 <LinearLayout
+                    android:id="@+id/layoutSulawesiUtara"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -795,7 +826,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sulawesi Utara"
+                        android:text="SULAWESI UTARA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -803,8 +834,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Sulawesi Tenggara -->
+                <!-- SULAWESI TENGGARA -->
                 <LinearLayout
+                    android:id="@+id/layoutSulawesiTenggara"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -821,7 +853,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sulawesi Tenggara"
+                        android:text="SULAWESI TENGGARA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -829,8 +861,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Sulawesi Selatan -->
+                <!-- SULAWESI SELATAN -->
                 <LinearLayout
+                    android:id="@+id/layoutSulawesiSelatan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -847,7 +880,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sulawessi Selatan"
+                        android:text="SULAWESI SELATAN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -855,8 +888,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Malulu Utara -->
+                <!-- MALUKU UTARA -->
                 <LinearLayout
+                    android:id="@+id/layoutMalukuUtara"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -873,7 +907,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Maluku Utara"
+                        android:text="MALUKU UTARA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -881,8 +915,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Maluku -->
+                <!-- MALUKU -->
                 <LinearLayout
+                    android:id="@+id/layoutMaluku"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -899,7 +934,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Maluku"
+                        android:text="MALUKU"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -907,8 +942,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua Barat -->
+                <!-- PAPUA BARAT -->
                 <LinearLayout
+                    android:id="@+id/layoutPapuaBarat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -925,7 +961,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua Barat"
+                        android:text="PAPUA BARAT"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -933,8 +969,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua -->
+                <!-- PAPUA -->
                 <LinearLayout
+                    android:id="@+id/layoutPapua"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -951,7 +988,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua"
+                        android:text="PAPUA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -959,8 +996,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua Tengah -->
+                <!-- PAPUA TENGAH -->
                 <LinearLayout
+                    android:id="@+id/layoutPapuaTengah"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -977,7 +1015,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua Tengah"
+                        android:text="PAPUA TENGAH"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -985,8 +1023,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua Pegunungan -->
+                <!-- PAPUA PEGUNUNGAN -->
                 <LinearLayout
+                    android:id="@+id/layoutPapuaPegunungan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -1003,7 +1042,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua pegunungan"
+                        android:text="PAPUA PEGUNUNGAN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -1011,8 +1050,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua Selatan -->
+                <!-- PAPUA SELATAN -->
                 <LinearLayout
+                    android:id="@+id/layoutPapuaSelatan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -1029,7 +1069,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua Selatan"
+                        android:text="PAPUA SELATAN"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
@@ -1037,8 +1077,9 @@
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
-                <!-- Papua Barat Daya -->
+                <!-- PAPUA BARAT DAYA -->
                 <LinearLayout
+                    android:id="@+id/layoutPapuaBaratDaya"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -1055,7 +1096,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Papua Barat Daya"
+                        android:text="PAPUA BARAT DAYA"
                         android:textColor="@android:color/white"
                         android:background="@drawable/label_bg"
                         android:padding="4dp"
