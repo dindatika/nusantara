@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +41,11 @@ public class KegiatanFragment extends Fragment {
     private EditText etPencarian;
 
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
     private KegiatanAdapter adapter;
     private List<Kegiatan> list = new ArrayList<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,8 +92,14 @@ public class KegiatanFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kegiatan, container, false);
 
-        // Profile click
+        // Inisialisasi View
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        etPencarian = view.findViewById(R.id.searchEditText);
+        fabTambahKegiatan = view.findViewById(R.id.fabTambahKegiatan);
+        recyclerView = view.findViewById(R.id.recyclerViewKegiatan);
+        progressBar = view.findViewById(R.id.progressBar);
+
+        // Profile click
         imgProfile.setOnClickListener(v -> {
             Log.d("KegiatanFragment", "Profile diklik");
             Intent intent = new Intent(getActivity(), ProfileActivity.class);
@@ -98,11 +107,17 @@ public class KegiatanFragment extends Fragment {
         });
 
         // Pencarian
-        etPencarian = view.findViewById(R.id.searchEditText);
         etPencarian.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int st, int c, int aft) {}
-            @Override public void onTextChanged(CharSequence s, int st, int bef, int cnt) {}
-            @Override public void afterTextChanged(Editable s) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int st, int c, int aft) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int st, int bef, int cnt) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 performSearch(s.toString());
             }
         });
@@ -115,24 +130,49 @@ public class KegiatanFragment extends Fragment {
             return false;
         });
 
-        // Inisialisasi FAB
-        fabTambahKegiatan = view.findViewById(R.id.fabTambahKegiatan);
+        // FAB
         fabTambahKegiatan.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), TambahKegiatanActivity.class);
             startActivity(intent);
         });
 
 
-        // Inisialisasi RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewKegiatan);
+        // RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new KegiatanAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
-        // Ambil data dari Firestore
+        // Ambil data
         ambilDataKegiatan();
 
         return view;
+    }
+
+    private void ambilDataKegiatan() {
+        // Tampilkan loading
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
+        db.collection("kegiatan")
+                .orderBy("tanggal", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    list.clear();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        Kegiatan kegiatan = doc.toObject(Kegiatan.class);
+                        list.add(kegiatan);
+                    }
+                    adapter.submitList(list);
+                    // Sembunyikan loading
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Gagal mengambil data", Toast.LENGTH_SHORT).show();
+                    // Tetap sembunyikan loading
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                });
     }
 
     private void performSearch(String query) {
@@ -147,28 +187,9 @@ public class KegiatanFragment extends Fragment {
         adapter.submitList(filteredList);
     }
 
-    private void ambilDataKegiatan() {
-        db.collection("kegiatan")
-                .orderBy("tanggal", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    list.clear();
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        Kegiatan kegiatan = doc.toObject(Kegiatan.class);
-                        list.add(kegiatan);
-                    }
-                    // Kirim list penuh ke adapter
-                    adapter.submitList(list);
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Gagal mengambil data", Toast.LENGTH_SHORT).show();
-                });
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        // refresh data setiap fragment terlihat
         ambilDataKegiatan();
     }
 }

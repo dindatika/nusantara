@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -45,6 +46,7 @@ public class TambahKegiatanActivity extends AppCompatActivity {
     private EditText etJudul, etCerita, etIsiCerita, edtGambarUrl;
     private Button btnSimpan, btnPilihGambar;
     private ImageView imgThumbnail;
+    private ProgressBar progressBar;
     private Uri imageUri;
     private String base64Image;
 
@@ -60,21 +62,20 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Tambahkan view form di bawah sini:
+        // Inisialisasi view
         etJudul = findViewById(R.id.etJudul);
         etCerita = findViewById(R.id.etCerita);
-        etIsiCerita  = findViewById(R.id.etIsiCerita);
+        etIsiCerita = findViewById(R.id.etIsiCerita);
         btnPilihGambar = findViewById(R.id.btnPilihGambar);
         btnSimpan = findViewById(R.id.btnSimpan);
         imgThumbnail = findViewById(R.id.imgThumbnail);
+        progressBar = findViewById(R.id.progressBar);
 
-        // tombol kembali
+        // Tombol kembali
         FloatingActionButton fabback = findViewById(R.id.fabback);
-        fabback.setOnClickListener(v -> {
-            // Menutup aktivitas dan kembali ke sebelumnya
-            finish();
-        });
+        fabback.setOnClickListener(v -> finish());
 
+        // Pilih gambar dari galeri
         btnPilihGambar.setOnClickListener(v -> openImageChooser());
 
         // Event klik tombol simpan
@@ -84,17 +85,17 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             String isiCerita = etIsiCerita.getText().toString().trim();
             String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-            // validasi
+            // Validasi
             if (judul.isEmpty() || cerita.isEmpty() || base64Image == null) {
                 Toast.makeText(this, "Semua field wajib diisi dan gambar harus dipilih!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Tampilkan gambar ke ImageView sebagai preview
+            // Tampilkan thumbnail sebagai preview
             imgThumbnail.setVisibility(View.VISIBLE);
-            Glide.with(this).load(btnPilihGambar).into(imgThumbnail);
+            Glide.with(this).load(imageUri).into(imgThumbnail);
 
-            // Ambil userId dari session
+            // Ambil userId dari session (misal via SessionManager)
             SessionManager session = new SessionManager(this);
             String userId = session.getUserId();
             if (userId == null) {
@@ -102,7 +103,11 @@ public class TambahKegiatanActivity extends AppCompatActivity {
                 return;
             }
 
-            // Siapkan data kegiatan
+            // Tampilkan loading
+            progressBar.setVisibility(View.VISIBLE);
+            btnSimpan.setEnabled(false);
+
+            // Siapkan data untuk disimpan
             Map<String, Object> kegiatan = new HashMap<>();
             kegiatan.put("judul", judul);
             kegiatan.put("ceritaSingkat", cerita);
@@ -111,14 +116,20 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             kegiatan.put("thumbnailBase64", base64Image);
             kegiatan.put("userId", userId);
 
+            // Simpan ke Firestore
             FirebaseFirestore.getInstance()
                     .collection("kegiatan")
                     .add(kegiatan)
                     .addOnSuccessListener(docRef -> {
+                        // Sembunyikan loading, tampilkan toast, lalu tutup activity
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(this, "Kegiatan berhasil disimpan!", Toast.LENGTH_SHORT).show();
                         finish();
                     })
                     .addOnFailureListener(e -> {
+                        // Sembunyikan loading, aktifkan kembali tombol, tampilkan error
+                        progressBar.setVisibility(View.GONE);
+                        btnSimpan.setEnabled(true);
                         Toast.makeText(this, "Gagal menyimpan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
@@ -134,7 +145,11 @@ public class TambahKegiatanActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST
+                && resultCode == RESULT_OK
+                && data != null
+                && data.getData() != null) {
+
             imageUri = data.getData();
             imgThumbnail.setImageURI(imageUri);
             imgThumbnail.setVisibility(View.VISIBLE);

@@ -86,10 +86,19 @@ public class BudayaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_budaya, container, false);
 
+        // Pindah menu profil
         ImageView imgProfile = view.findViewById(R.id.imgProfile);
         imgProfile.setOnClickListener(v -> {
             Log.d("BudayaFragment", "Profile diklik");
             Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
+
+
+        // Pindah menu provinsi aceh
+        LinearLayout layoutAceh = view.findViewById(R.id.layoutAceh);
+        layoutAceh.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ProvinsiAceh.class);
             startActivity(intent);
         });
 
