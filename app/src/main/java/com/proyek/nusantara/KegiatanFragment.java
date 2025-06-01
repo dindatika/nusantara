@@ -36,13 +36,13 @@ import java.util.List;
 public class KegiatanFragment extends Fragment {
 
     // Menambahkan kegiatan
-    FloatingActionButton fabTambahKegiatan;
-    EditText etPencarian;
+    private FloatingActionButton fabTambahKegiatan;
+    private EditText etPencarian;
 
-    RecyclerView recyclerView;
-    KegiatanAdapter adapter;
-    List<Kegiatan> list;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private RecyclerView recyclerView;
+    private KegiatanAdapter adapter;
+    private List<Kegiatan> list = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -117,19 +117,15 @@ public class KegiatanFragment extends Fragment {
 
         // Inisialisasi FAB
         fabTambahKegiatan = view.findViewById(R.id.fabTambahKegiatan);
-        fabTambahKegiatan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TambahKegiatanActivity.class);
-                startActivity(intent);
-            }
+        fabTambahKegiatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TambahKegiatanActivity.class);
+            startActivity(intent);
         });
 
 
         // Inisialisasi RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewKegiatan);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        list = new ArrayList<>();
         adapter = new KegiatanAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
@@ -161,6 +157,7 @@ public class KegiatanFragment extends Fragment {
                         Kegiatan kegiatan = doc.toObject(Kegiatan.class);
                         list.add(kegiatan);
                     }
+                    // Kirim list penuh ke adapter
                     adapter.submitList(list);
                 })
                 .addOnFailureListener(e -> {
@@ -171,6 +168,7 @@ public class KegiatanFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ambilDataKegiatan(); // refresh data setiap fragment terlihat
+        // refresh data setiap fragment terlihat
+        ambilDataKegiatan();
     }
 }

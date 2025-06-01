@@ -3,8 +3,11 @@ package com.proyek.nusantara;
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.storage.StorageReference;
 //import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,9 +40,13 @@ import java.util.UUID;
 
 public class TambahKegiatanActivity extends AppCompatActivity {
 
+    private static final int PICK_IMAGE_REQUEST = 1;
+
     private EditText etJudul, etCerita, etIsiCerita, edtGambarUrl;
-    private Button btnSimpan;
+    private Button btnSimpan, btnPilihGambar;
     private ImageView imgThumbnail;
+    private Uri imageUri;
+    private String base64Image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +64,7 @@ public class TambahKegiatanActivity extends AppCompatActivity {
         etJudul = findViewById(R.id.etJudul);
         etCerita = findViewById(R.id.etCerita);
         etIsiCerita  = findViewById(R.id.etIsiCerita);
-        edtGambarUrl = findViewById(R.id.edtGambarUrl);
+        btnPilihGambar = findViewById(R.id.btnPilihGambar);
         btnSimpan = findViewById(R.id.btnSimpan);
         imgThumbnail = findViewById(R.id.imgThumbnail);
 
@@ -66,23 +75,24 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             finish();
         });
 
+        btnPilihGambar.setOnClickListener(v -> openImageChooser());
+
         // Event klik tombol simpan
         btnSimpan.setOnClickListener(v -> {
             String judul = etJudul.getText().toString().trim();
             String cerita = etCerita.getText().toString().trim();
             String isiCerita = etIsiCerita.getText().toString().trim();
-            String gambarUrl = edtGambarUrl.getText().toString().trim();
             String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
             // validasi
-            if (judul.isEmpty() || cerita.isEmpty() || gambarUrl.isEmpty()) {
-                Toast.makeText(this, "Semua field wajib diisi!", Toast.LENGTH_SHORT).show();
+            if (judul.isEmpty() || cerita.isEmpty() || base64Image == null) {
+                Toast.makeText(this, "Semua field wajib diisi dan gambar harus dipilih!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             // Tampilkan gambar ke ImageView sebagai preview
             imgThumbnail.setVisibility(View.VISIBLE);
-            Glide.with(this).load(gambarUrl).into(imgThumbnail);
+            Glide.with(this).load(btnPilihGambar).into(imgThumbnail);
 
             // Ambil userId dari session
             SessionManager session = new SessionManager(this);
@@ -98,10 +108,9 @@ public class TambahKegiatanActivity extends AppCompatActivity {
             kegiatan.put("ceritaSingkat", cerita);
             kegiatan.put("isiCerita", isiCerita);
             kegiatan.put("tanggal", tanggal);
-            kegiatan.put("thumbnailUrl", gambarUrl);
+            kegiatan.put("thumbnailBase64", base64Image);
             kegiatan.put("userId", userId);
 
-            // simpan ke Firestore
             FirebaseFirestore.getInstance()
                     .collection("kegiatan")
                     .add(kegiatan)
@@ -113,5 +122,37 @@ public class TambahKegiatanActivity extends AppCompatActivity {
                         Toast.makeText(this, "Gagal menyimpan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+    }
+
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Pilih Gambar"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            imgThumbnail.setImageURI(imageUri);
+            imgThumbnail.setVisibility(View.VISIBLE);
+            convertImageToBase64(imageUri);
+        }
+    }
+
+    private void convertImageToBase64(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+            byte[] imageBytes = baos.toByteArray();
+            base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Gagal mengonversi gambar", Toast.LENGTH_SHORT).show();
+        }
     }
 }

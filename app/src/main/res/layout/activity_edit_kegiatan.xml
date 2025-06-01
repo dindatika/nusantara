@@ -29,42 +29,6 @@
                 android:src="@drawable/headerumum"
                 android:contentDescription="Header background" />
 
-            <!-- Gambar Thumbnail -->
-
-            <!-- Preview Gambar -->
-            <ImageView
-                android:id="@+id/imgThumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                android:contentDescription="Gambar Kegiatan"/>
-
-            <!-- Pilihan Input -->
-                <!-- menggunakan URL -->
-                <EditText
-                    android:id="@+id/edtGambarUrl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Masukkan URL gambar"
-                    android:inputType="textUri"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/black"
-                    android:textColorHint="@color/black"
-                    android:padding="12dp"
-                    android:layout_marginTop="8dp"/>
-
-                    <!-- menggunakan button -->
-<!--                    <Button-->
-<!--                        android:id="@+id/btnPilihGambar"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Pilih Gambar Thumbnail"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:backgroundTint="@color/black"-->
-<!--                        android:textColor="@color/white"/>-->
-
             <!-- Judul -->
             <EditText
                 android:id="@+id/etJudul"
@@ -107,6 +71,41 @@
                 android:backgroundTint="@color/black"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
+
+            <!-- Gambar Thumbnail -->
+                <!-- Pilihan Input -->
+                    <!-- menggunakan URL -->
+<!--                        <EditText-->
+<!--                            android:id="@+id/edtGambarUrl"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:hint="Masukkan URL gambar"-->
+<!--                            android:inputType="textUri"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:backgroundTint="@color/black"-->
+<!--                            android:textColorHint="@color/black"-->
+<!--                            android:padding="12dp"-->
+<!--                            android:layout_marginTop="8dp"/>-->
+
+                    <!-- menggunakan Galeri -->
+                        <Button
+                            android:id="@+id/btnPilihGambar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pilih Gambar Thumbnail"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="@color/black"
+                            android:textColor="@color/white"/>
+
+            <!-- Preview Gambar -->
+            <ImageView
+                android:id="@+id/imgThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:contentDescription="Gambar Kegiatan"/>
 
             <!-- Tombol Simpan -->
             <Button

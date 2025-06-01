@@ -2,6 +2,9 @@ package com.proyek.nusantara.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.ViewHolder> {
+
     private List<Kegiatan> kegiatanList;
     private Context context;
 
@@ -39,18 +43,31 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Kegiatan kegiatan = kegiatanList.get(position);
+
+        // Set teks: judul, tanggal, cerita singkat
         holder.tvJudul.setText(kegiatan.getJudul());
         holder.tvTanggal.setText(kegiatan.getTanggal());
         holder.tvCerita.setText(kegiatan.getCeritaSingkat());
-        Glide.with(context).load(kegiatan.getThumbnailUrl()).into(holder.imgThumbnail);
 
+        // Decode Base64 menjadi Bitmap, lalu set ke ImageView
+        String base64 = kegiatan.getThumbnailBase64();
+        if (base64 != null && !base64.isEmpty()) {
+            byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+            holder.imgThumbnail.setImageBitmap(bitmap);
+        } else {
+            // Jika tidak ada Base64, gunakan placeholder
+            holder.imgThumbnail.setImageResource(R.drawable.ic_nusantara);
+        }
+
+        // Ketika diklik "Lihat Detail", kirim semua data, termasuk base64
         holder.tvLihatDetail.setOnClickListener(v -> {
             // Kirim data ke DetailActivity
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("judul", kegiatan.getJudul());
             intent.putExtra("tanggal", kegiatan.getTanggal());
             intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
-            intent.putExtra("thumbnailUrl", kegiatan.getThumbnailUrl());
+            intent.putExtra("thumbnailBase64", kegiatan.getThumbnailBase64());
             intent.putExtra("isiCerita", kegiatan.getIsiCerita());
             context.startActivity(intent);
         });
@@ -62,9 +79,8 @@ public class KegiatanAdapter extends RecyclerView.Adapter<KegiatanAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvJudul, tvCerita, tvTanggal;
+        TextView tvJudul, tvCerita, tvTanggal, tvLihatDetail;
         ImageView imgThumbnail;
-        TextView tvLihatDetail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

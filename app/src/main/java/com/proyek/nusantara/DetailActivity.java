@@ -1,6 +1,9 @@
 package com.proyek.nusantara;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         String judul = getIntent().getStringExtra("judul");
         String tanggal = getIntent().getStringExtra("tanggal");
         String ceritaSingkat = getIntent().getStringExtra("ceritaSingkat");
-        String thumbnailUrl = getIntent().getStringExtra("thumbnailUrl");
+        String thumbnailBase64   = getIntent().getStringExtra("thumbnailBase64");
         String isiCerita = getIntent().getStringExtra("isiCerita");
 
         // Tampilkan data di UI
@@ -46,9 +49,13 @@ public class DetailActivity extends AppCompatActivity {
         tvCeritaSingkat.setText(ceritaSingkat);
         tvIsiCerita.setText(isiCerita);
 
-        if (thumbnailUrl != null && !thumbnailUrl.isEmpty()) {
-            Glide.with(this).load(thumbnailUrl).into(ivThumbnail);
+        // Decode Base64 menjadi Bitmap, lalu set ke ImageView
+        if (thumbnailBase64 != null && !thumbnailBase64.isEmpty()) {
+            byte[] decodedBytes = Base64.decode(thumbnailBase64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+            ivThumbnail.setImageBitmap(bitmap);
         } else {
+            // Jika tidak ada Base64, tampilkan placeholder
             ivThumbnail.setImageResource(R.drawable.background);
         }
 

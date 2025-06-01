@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".TambahKegiatanActivity"
     android:background="@android:color/white">
 
     <ScrollView
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,26 +84,26 @@
 
             <!-- Gambar Thumbnail -->
                 <!-- menggunakan URL -->
-                <EditText
-                    android:id="@+id/edtGambarUrl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Masukkan URL gambar"
-                    android:inputType="textUri"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/black"
-                    android:textColorHint="@color/black"
-                    android:padding="12dp"/>
-
-<!--                &lt;!&ndash; menggunakan button &ndash;&gt;-->
-<!--                <Button-->
-<!--                    android:id="@+id/btnPilihGambar"-->
-<!--                    android:layout_width="wrap_content"-->
+<!--                <EditText-->
+<!--                    android:id="@+id/edtGambarUrl"-->
+<!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Pilih Gambar Thumbnail"-->
-<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:hint="Masukkan URL gambar"-->
+<!--                    android:inputType="textUri"-->
+<!--                    android:textColor="@color/black"-->
 <!--                    android:backgroundTint="@color/black"-->
-<!--                    android:textColor="@color/white"/>-->
+<!--                    android:textColorHint="@color/black"-->
+<!--                    android:padding="12dp"/>-->
+
+                <!-- menggunakan button -->
+                <Button
+                    android:id="@+id/btnPilihGambar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Gambar"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/white"/>
 
                     <!-- Tampilan Gambar dari button -->
                     <ImageView
@@ -135,4 +137,4 @@
         android:contentDescription="Kembali"
         android:src="@drawable/ic_back"
         app:backgroundTint="@color/white" />
-</FrameLayout>
+</LinearLayout>

@@ -2,6 +2,9 @@ package com.proyek.nusantara.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,26 +42,40 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_kegiatan_profil, parent, false);
+    public ProfileKegiatanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.item_kegiatan_profil, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileKegiatanAdapter.ViewHolder holder, int position) {
         Kegiatan kegiatan = kegiatanList.get(position);
+
+        // Set teks: judul, tanggal, cerita singkat
         holder.tvJudul.setText(kegiatan.getJudul());
         holder.tvTanggal.setText(kegiatan.getTanggal());
         holder.tvCerita.setText(kegiatan.getCeritaSingkat());
 
-        // Load thumbnail
-        if (kegiatan.getThumbnailUrl() != null && !kegiatan.getThumbnailUrl().isEmpty()) {
-            Glide.with(context)
-                    .load(kegiatan.getThumbnailUrl())
-                    .into(holder.imgThumbnail);
+        // Load Thumnail Decode Base64 menjadi Bitmap, lalu set ke ImageView
+        String base64 = kegiatan.getThumbnailBase64();
+        if (base64 != null && !base64.isEmpty()) {
+            byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+            holder.imgThumbnail.setImageBitmap(bitmap);
         } else {
-            holder.imgThumbnail.setImageResource(R.drawable.background); // Placeholder image
+            // Jika tidak ada Base64, tampilkan placeholder
+            holder.imgThumbnail.setImageResource(R.drawable.background);
         }
+
+//        // Load thumbnail
+//        if (kegiatan.getThumbnailUrl() != null && !kegiatan.getThumbnailUrl().isEmpty()) {
+//            Glide.with(context)
+//                    .load(kegiatan.getThumbnailUrl())
+//                    .into(holder.imgThumbnail);
+//        } else {
+//            holder.imgThumbnail.setImageResource(R.drawable.background); // Placeholder image
+//        }
 
         // View Detail: langsung ke DetailActivity
         holder.tvLihatDetail.setOnClickListener(v -> {
@@ -67,8 +84,8 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
             intent.putExtra("judul", kegiatan.getJudul());
             intent.putExtra("tanggal", kegiatan.getTanggal());
             intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
-            intent.putExtra("thumbnailUrl", kegiatan.getThumbnailUrl());
             intent.putExtra("isiCerita", kegiatan.getIsiCerita());
+            intent.putExtra("thumbnailBase64", kegiatan.getThumbnailBase64());
             context.startActivity(intent);
         });
 
@@ -80,7 +97,7 @@ public class ProfileKegiatanAdapter extends RecyclerView.Adapter<ProfileKegiatan
             intent.putExtra("tanggal", kegiatan.getTanggal());
             intent.putExtra("ceritaSingkat", kegiatan.getCeritaSingkat());
             intent.putExtra("isiCerita", kegiatan.getIsiCerita());
-            intent.putExtra("thumbnailUrl", kegiatan.getThumbnailUrl());
+            intent.putExtra("thumbnailBase64", kegiatan.getThumbnailBase64());
             context.startActivity(intent);
         });
 

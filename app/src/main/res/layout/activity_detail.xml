@@ -46,7 +46,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="12dp"
-                android:text="Judul Kegiatan" />
+                android:text="Judul Kegiatan"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/black"/>
 
             <!-- Date -->
             <TextView
@@ -54,9 +56,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#444"
                 android:layout_marginTop="4dp"
-                android:text="Tanggal Posting" />
+                android:text="Tanggal Posting"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/black"/>
 
             <!-- Cerita Singkat -->
             <TextView
@@ -65,7 +68,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginTop="12dp"
-                android:text="Cerita singkat..." />
+                android:text="Cerita singkat..."
+                android:backgroundTint="@color/black"
+                android:textColor="@color/black"/>
 
             <!-- Isi Cerita Lengkap -->
             <TextView
@@ -74,7 +79,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginTop="12dp"
-                android:text="Isi cerita lengkap" />
+                android:text="Isi cerita lengkap"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
     </ScrollView>

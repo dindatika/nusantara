@@ -1,7 +1,11 @@
 package com.proyek.nusantara;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,15 +23,21 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditKegiatanActivity extends AppCompatActivity {
 
-    private EditText etJudul, etCeritaSingkat, etIsiCerita, edtGambarUrl;
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private EditText etJudul, etCeritaSingkat, etIsiCerita;
     private ImageView imgThumbnail;
     private Button btnPilihGambar, btnSimpan;
-    private String postId, tanggal, thumbnailUrl;
+    private String postId, tanggal;
+    private String existingBase64;      // Base64 lama dari Intent
+    private String newBase64Image;      // Base64 jika user memilih gambar baru
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,63 +63,64 @@ public class EditKegiatanActivity extends AppCompatActivity {
         etCeritaSingkat = findViewById(R.id.etCeritaSingkat);
         etIsiCerita = findViewById(R.id.etIsiCerita);
         imgThumbnail = findViewById(R.id.imgThumbnail);
-        edtGambarUrl = findViewById(R.id.edtGambarUrl);
+        btnPilihGambar  = findViewById(R.id.btnPilihGambar);
         btnSimpan = findViewById(R.id.btnSimpan);
 
         // Ambil data dari Intent
         Intent intent = getIntent();
         postId = intent.getStringExtra("postId");
-        String judul = intent.getStringExtra("judul");
+        String judulLama    = intent.getStringExtra("judul");
 //        tanggal = intent.getStringExtra("tanggal");
-        String ceritaSingkat = intent.getStringExtra("ceritaSingkat");
-        String isiCerita = intent.getStringExtra("isiCerita");
-        String thumbnailUrl  = intent.getStringExtra("thumbnailUrl");
+        String ceritaLama   = intent.getStringExtra("ceritaSingkat");
+        String isiLama      = intent.getStringExtra("isiCerita");
+        existingBase64      = intent.getStringExtra("thumbnailBase64");
 
         // Set data ke view
-        etJudul.setText(judul);
-        etCeritaSingkat.setText(ceritaSingkat);
-        etIsiCerita.setText(isiCerita);
-        edtGambarUrl.setText(thumbnailUrl);
+        etJudul.setText(judulLama);
+        etCeritaSingkat.setText(ceritaLama);
+        etIsiCerita.setText(isiLama);
 
-        // Load dan preview gambar
-        if (thumbnailUrl != null && !thumbnailUrl.isEmpty()) {
+        // Tampilkan thumbnail lama (jika ada)
+        if (existingBase64 != null && !existingBase64.isEmpty()) {
             imgThumbnail.setVisibility(View.VISIBLE);
-            Glide.with(this)
-                    .load(thumbnailUrl)
-                    .into(imgThumbnail);
+            byte[] decodedBytes = Base64.decode(existingBase64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+            imgThumbnail.setImageBitmap(bitmap);
         } else {
             imgThumbnail.setVisibility(View.GONE);
-            imgThumbnail.setImageResource(R.drawable.rounded_bg);
         }
+
+        // Tombol Pilih Gambar: buka galeri
+        btnPilihGambar.setOnClickListener(v -> openImageChooser());
 
         // Button Simpan Perubahan
         btnSimpan.setOnClickListener(v -> {
-            String judulBaru = etJudul.getText().toString().trim();
-            String ceritaSingkatBaru = etCeritaSingkat.getText().toString().trim();
-            String isiCeritaBaru = etIsiCerita.getText().toString().trim();
-            String thumbnailUrlBaru = edtGambarUrl.getText().toString().trim();
+            String judulBaru        = etJudul.getText().toString().trim();
+            String ceritaBaru       = etCeritaSingkat.getText().toString().trim();
+            String isiBaru          = etIsiCerita.getText().toString().trim();
 
-            // Validasi input
-            if (judulBaru.isEmpty() || ceritaSingkatBaru.isEmpty()
-                    || isiCeritaBaru.isEmpty() || thumbnailUrlBaru.isEmpty()) {
-                Toast.makeText(this, "Semua bidang harus diisi", Toast.LENGTH_SHORT).show();
+            // Pilih Base64 mana yang dipakai: baru atau lama
+            String thumbnailToSave;
+            if (newBase64Image != null) {
+                thumbnailToSave = newBase64Image;
+            } else {
+                thumbnailToSave = existingBase64 != null ? existingBase64 : "";
+            }
+
+            // Validasi semua field wajib diisi, termasuk thumbnail
+            if (judulBaru.isEmpty() || ceritaBaru.isEmpty() || isiBaru.isEmpty() || thumbnailToSave.isEmpty()) {
+                Toast.makeText(this, "Semua data harus diisi", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Preview gambar baru
-            imgThumbnail.setVisibility(View.VISIBLE);
-            Glide.with(this)
-                    .load(thumbnailUrlBaru)
-                    .into(imgThumbnail);
-
-            // Buat map untuk data yang akan diupdate
+            // Buat map data untuk update Firestore
             Map<String, Object> dataUpdate = new HashMap<>();
-            dataUpdate.put("judul",          judulBaru);
-            dataUpdate.put("ceritaSingkat",  ceritaSingkatBaru);
-            dataUpdate.put("isiCerita",      isiCeritaBaru);
-            dataUpdate.put("thumbnailUrl",   thumbnailUrlBaru);
+            dataUpdate.put("judul",         judulBaru);
+            dataUpdate.put("ceritaSingkat", ceritaBaru);
+            dataUpdate.put("isiCerita",     isiBaru);
+            dataUpdate.put("thumbnailBase64", thumbnailToSave);
 
-            // Update di Firestore
+            // Update dokumen di Firestore
             FirebaseFirestore.getInstance()
                     .collection("kegiatan")
                     .document(postId)
@@ -121,5 +133,42 @@ public class EditKegiatanActivity extends AppCompatActivity {
                         Toast.makeText(this, "Gagal memperbarui: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+    }
+
+    // Buka galeri untuk memilih gambar.
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Pilih Gambar Thumbnail"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+            // Tampilkan preview ke ImageView
+            imgThumbnail.setVisibility(View.VISIBLE);
+            imgThumbnail.setImageURI(imageUri);
+
+            // Konversi gambar yang dipilih menjadi Base64
+            convertImageToBase64(imageUri);
+        }
+    }
+
+    // Konversi gambar (URI) ke string Base64, simpan di newBase64Image.
+    private void convertImageToBase64(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+            byte[] imageBytes = baos.toByteArray();
+            newBase64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Gagal mengonversi gambar", Toast.LENGTH_SHORT).show();
+        }
     }
 }

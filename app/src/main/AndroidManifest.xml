@@ -28,6 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".TambahKegiatanActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
