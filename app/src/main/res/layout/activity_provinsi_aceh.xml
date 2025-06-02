@@ -35,10 +35,9 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <!-- Banner Budaya -->
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
+                android:layout_height="133dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/header_provinsiaceh" />
@@ -54,316 +53,316 @@
                 android:alignmentMode="alignMargins"
                 android:useDefaultMargins="true">
 
-                <!-- PAKAIAN -->
-                <LinearLayout
-                    android:layout_width="0dp"
+            <!-- PAKAIAN -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehpakaian"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="PAKAIAN"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehpakaian"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- RUMAH -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PAKAIAN"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/budaya_aceh"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- RUMAH -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="RUMAH"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/budaya_aceh"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- MAKANAN -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="RUMAH"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehmakanan"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- MAKANAN -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="MAKANAN"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehmakanan"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- TARIAN -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MAKANAN"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehtari"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- TARIAN -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="TARIAN"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehtari"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- OBJEK WISATA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TARIAN"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehobjekwisata"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- OBJEK WISATA -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="OBJEK WISATA"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehobjekwisata"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- ALAT MUSIK -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="OBJEK WISATA"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehalatmusik"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- ALAT MUSIK -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="ALAT MUSIK"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehalatmusik"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- UPACARA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ALAT MUSIK"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehupacara"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- UPACARA -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="UPACARA"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehupacara"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- SENJATA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="UPACARA"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehsenjata"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- SENJATA -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="SENJATA"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehsenjata"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- PRODUK -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SENJATA"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehproduk"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- PRODUK -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="PRODUK"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehproduk"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- PERMAINAN TRADISIOANL -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PRODUK"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehpermainan"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- PERMAINAN TRADISIOANL -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="PERMAINAN TRADISIONAL"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehpermainan"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- FLORA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PERMAINAN TRADISIONAL"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/acehflora"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_corners" />
 
-                <!-- FLORA -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:text="FLORA"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/label_bg"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehflora"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
+            <!-- FAUNA -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="FLORA"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/acehfauna"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_corners" />
 
-                <!-- FAUNA -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:src="@drawable/acehfauna"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/rounded_corners" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="FAUNA"
-                        android:textColor="@android:color/white"
-                        android:background="@drawable/label_bg"
-                        android:padding="4dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FAUNA"
+                android:textColor="@android:color/white"
+                android:background="@drawable/label_bg"
+                android:padding="4dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
                 </LinearLayout>
             </GridLayout>
         </LinearLayout>

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Nusantara"
         tools:targetApi="31">
         <activity
+            android:name=".ProvinsiSumatraUtara"
+            android:exported="false" />
+        <activity
             android:name=".ProvinsiAceh"
             android:exported="false" />
         <activity
