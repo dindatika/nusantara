@@ -91,6 +91,12 @@ public class TambahKegiatanActivity extends AppCompatActivity {
                 return;
             }
 
+            // ✅ Validasi base64 image
+            if (base64Image == null) {
+                Toast.makeText(this, "Gambar terlalu besar atau belum dipilih!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // Tampilkan thumbnail sebagai preview
             imgThumbnail.setVisibility(View.VISIBLE);
             Glide.with(this).load(imageUri).into(imgThumbnail);
@@ -160,14 +166,39 @@ public class TambahKegiatanActivity extends AppCompatActivity {
     private void convertImageToBase64(Uri uri) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uri);
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
+
+            // Resize gambar jika lebih besar dari 800px
+            int maxSize = 800;
+            int width = originalBitmap.getWidth();
+            int height = originalBitmap.getHeight();
+            float scale = Math.min((float) maxSize / width, (float) maxSize / height);
+            int scaledWidth = Math.round(scale * width);
+            int scaledHeight = Math.round(scale * height);
+
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, scaledWidth, scaledHeight, true);
+
+            // Kompres gambar ke JPEG 70%
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
             byte[] imageBytes = baos.toByteArray();
+
+            // Cek ukuran hasil kompresi
+            double sizeInKB = imageBytes.length / 1024.0;
+            if (sizeInKB > 900) { // Aman di bawah 1 MB batas dokumen Firestore
+                Toast.makeText(this, "Ukuran gambar terlalu besar: " + String.format("%.2f", sizeInKB) + " KB", Toast.LENGTH_LONG).show();
+                base64Image = null;
+                return;
+            }
+
+            // Konversi ke Base64
             base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            Toast.makeText(this, "Gambar berhasil dipilih. Ukuran: " + String.format("%.2f", sizeInKB) + " KB", Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Gagal mengonversi gambar", Toast.LENGTH_SHORT).show();
+            base64Image = null;
         }
     }
 }
