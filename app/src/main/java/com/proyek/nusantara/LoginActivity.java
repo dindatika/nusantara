@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private SessionManager session;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

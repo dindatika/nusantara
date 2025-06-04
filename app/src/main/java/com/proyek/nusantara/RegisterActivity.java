@@ -64,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (email.isEmpty() || nama.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Lengkapi data", Toast.LENGTH_SHORT).show();
+                } else if (!email.endsWith("@gmail.com")) {
+                    Toast.makeText(RegisterActivity.this, "Gunakan @gmail.com", Toast.LENGTH_SHORT).show();
                 } else {
                     buatAkun(email, nama, password);
                 }
