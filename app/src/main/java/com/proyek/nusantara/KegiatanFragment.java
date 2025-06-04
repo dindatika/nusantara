@@ -4,10 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -31,13 +37,15 @@ import java.util.List;
 public class KegiatanFragment extends Fragment {
 
     // Menambahkan kegiatan
-    FloatingActionButton fabTambahKegiatan;
-    EditText etPencarian;
+    private FloatingActionButton fabTambahKegiatan;
+    private EditText etPencarian;
 
-    RecyclerView recyclerView;
-    KegiatanAdapter adapter;
-    List<Kegiatan> list;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private KegiatanAdapter adapter;
+    private List<Kegiatan> list = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,55 +92,67 @@ public class KegiatanFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kegiatan, container, false);
 
+        // Inisialisasi View
+        ImageView imgProfile = view.findViewById(R.id.imgProfile);
         etPencarian = view.findViewById(R.id.searchEditText);
+        fabTambahKegiatan = view.findViewById(R.id.fabTambahKegiatan);
+        recyclerView = view.findViewById(R.id.recyclerViewKegiatan);
+        progressBar = view.findViewById(R.id.progressBar);
+
+        // Profile click
+        imgProfile.setOnClickListener(v -> {
+            Log.d("KegiatanFragment", "Profile diklik");
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
+
+        // Pencarian
         etPencarian.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void beforeTextChanged(CharSequence s, int st, int c, int aft) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence s, int st, int bef, int cnt) {
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                List<Kegiatan> filteredList = new ArrayList<>();
-                for (Kegiatan kegiatan : list) {
-                    if (kegiatan.getJudul().toLowerCase().contains(s.toString().toLowerCase()) || kegiatan.getCerita().toLowerCase().contains(s.toString().toLowerCase())) {
-                        filteredList.add(kegiatan);
-                    }
-                }
-                adapter.submitList(filteredList);
+                performSearch(s.toString());
             }
         });
 
-        // Inisialisasi FAB
-        fabTambahKegiatan = view.findViewById(R.id.fabTambahKegiatan);
-        fabTambahKegiatan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TambahKegiatanActivity.class);
-                startActivity(intent);
+        etPencarian.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch(v.getText().toString());
+                return true;
             }
+            return false;
+        });
+
+        // FAB
+        fabTambahKegiatan.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TambahKegiatanActivity.class);
+            startActivity(intent);
         });
 
 
-        // Inisialisasi RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewKegiatan);
+        // RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        list = new ArrayList<>();
         adapter = new KegiatanAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
-        // Ambil data dari Firestore
+        // Ambil data
         ambilDataKegiatan();
 
         return view;
     }
 
     private void ambilDataKegiatan() {
+        // Tampilkan loading
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
         db.collection("kegiatan")
                 .orderBy("tanggal", Query.Direction.DESCENDING)
                 .get()
@@ -143,15 +163,33 @@ public class KegiatanFragment extends Fragment {
                         list.add(kegiatan);
                     }
                     adapter.submitList(list);
+                    // Sembunyikan loading
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Gagal mengambil data", Toast.LENGTH_SHORT).show();
+                    // Tetap sembunyikan loading
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 });
+    }
+
+    private void performSearch(String query) {
+        String lower = query.toLowerCase();
+        List<Kegiatan> filteredList = new ArrayList<>();
+        for (Kegiatan k : list) {
+            if (k.getJudul().toLowerCase().contains(lower)
+                    || k.getCeritaSingkat().toLowerCase().contains(lower)) {
+                filteredList.add(k);
+            }
+        }
+        adapter.submitList(filteredList);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ambilDataKegiatan(); // refresh data setiap fragment terlihat
+        ambilDataKegiatan();
     }
 }

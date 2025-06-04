@@ -1,12 +1,15 @@
 package com.proyek.nusantara;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,15 @@ public class SejarahFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sejarah, container, false);
+        View view = inflater.inflate(R.layout.fragment_sejarah, container, false);
+
+        ImageView imgProfile = view.findViewById(R.id.imgProfile);
+        imgProfile.setOnClickListener(v -> {
+            Log.d("BerandaFragment", "Profile diklik");
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(intent);
+        });
+
+        return view;
     }
 }
